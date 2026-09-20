@@ -1,13 +1,13 @@
 # MPC Key 37 Ableton Live tutorial
 
-Open `MPC Key 37 Tutorial.als` in Session View. It is a safe practice set: twelve tracks, two prepared scenes of blank MIDI clips, Drift for keyboard playback, and two Auto Filters for device control. There is no audio material in the set, so you can explore without surprises.
+Open `MPC Key 37 Tutorial.als` in Session View. It is a safe practice set: twelve tracks, two prepared scenes of blank MIDI clips, Drift for keyboard playback, a 4x4 drum pad for finger drumming, and two Auto Filters for device control. 
 
 ## Before you start
 
 1. Put the MPC Key 37 in **Controller Mode**.
 2. In Live's MIDI settings, select **MPC_Key_37** as the control surface, with MPC Key 37 Port 1 as its input. Leave **Takeover Mode** set to **Pickup**.
-3. Use a short press of A, B, C, or D to open that page. **Double-tap A** to open Page E.
-4. Pad numbers use the MPC's printed 1–16 labels. On B, the physical top row is pads 13–16.
+3. Use a short press of A, B, C, or D to open that page. **Double-tap A** to open Page E. **Double-tap D** to open Page P.
+4. Pad numbers use the MPC's printed 1–16 labels. a
 
 
 ### 1. Device page A
@@ -55,6 +55,10 @@ With a MIDI clip selected:
 
 The physical **Play**, **Stop**, and **Record** buttons provide the same core transport actions without changing pages.
 
+### 5. Finger drumming
+
+Create or select an armed Drum Rack track receiving **All Ins / Ch. 10**. Double-tap **D** to open Performance, then play pads 1–16 — they follow the rack's 4x4 grid from C1 upward, pad 1 at the bottom-left. Press A, B, C, or D once to return to controls.
+
 ## Control map
 
 | Page | Purpose | Main controls |
@@ -64,9 +68,11 @@ The physical **Play**, **Stop**, and **Record** buttons provide the same core tr
 | C | Scenes | 16-scene launch page |
 | D | Mixer | D1–D8 select tracks; D9–D12 track actions; D13–D16 Q-Link modes |
 | E | Navigation and editing | E1–E8 movement; E9–E16 transport, history, edit, stop, status |
+| P | Finger drumming
+
 
 For the full pad-by-pad reference, see `CONTROL_MAP.md`.
 
 ## Good practice habits
 
-Start every session by pressing A, selecting the track/device you intend to control, and moving each Q-Link through its current value once. That makes Pickup predictable. If the MPC is reconnected after a disconnect, press A before continuing. Keep keyboard performance on the Drift track or another MIDI track receiving channel 16.
+Start every session by pressing A, selecting the track/device you intend to control, and moving each Q-Link through its current value once. That makes Pickup predictable. If the MPC is reconnected after a disconnect, press A before continuing. 

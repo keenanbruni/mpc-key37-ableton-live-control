@@ -18,6 +18,7 @@ from ableton.v2.control_surface.components import (
 from ableton.v2.control_surface.control import ControlList, MappedSensitivitySettingControl
 from ableton.v2.control_surface.default_bank_definitions import BANK_DEFINITIONS
 from ableton.v2.control_surface.elements import ButtonMatrixElement
+from ableton.v2.control_surface.input_control_element import ScriptForwarding
 
 from Akai_Force_MPC.device import DeviceComponent
 from Akai_Force_MPC.device_navigation import ScrollingDeviceNavigationComponent
@@ -32,7 +33,7 @@ from Akai_Force_MPC.skin import MPCColors
 
 from . import elements
 from .profile import load, four_parameters, bounded_offset
-from .routing import PadRouter
+from .routing import PadRouter, canonical_pad_note, pad_translations
 
 
 class FourParameterComponent(DeviceParameterComponent):
@@ -62,6 +63,7 @@ class MPCKey37(ControlSurface):
         self._encoders = []
         self._callbacks = []
         self._raw_buttons = []
+        self._pad_controls = []
         self._router = PadRouter()
         self._mode = "device"
         self._device_half = self._mixer_half = self._send_index = 0
@@ -179,6 +181,7 @@ class MPCKey37(ControlSurface):
         control.add_value_listener(on_value)
         self._raw_buttons.append(control)
         self._callbacks.append((control, on_value))
+        return control
 
     def _dispatch_pad_events(self, events):
         for action, value in events:
@@ -186,18 +189,43 @@ class MPCKey37(ControlSurface):
             if control:
                 control.receive_value(value)
 
+    def _receive_pad(self, index, value):
+        self._dispatch_pad_events(self._router.receive(index, value))
+        self._apply_pad_forwarding()
+
+    def _apply_pad_forwarding(self):
+        # Page P plays an armed track on the pad channel: stop consuming the
+        # pad notes so Live also delivers them to tracks (with velocity and
+        # note-offs), while the script stays informed.  On every other page
+        # the notes are consumed, so control pads never double as instrument
+        # notes.  A pad still held when leaving page P keeps forwarding until
+        # its release; otherwise the note-off is consumed and the instrument
+        # note hangs.
+        for control in self._pad_controls:
+            if self._router.page == "P":
+                control.script_forwarding = ScriptForwarding.non_consuming
+            elif not control.is_pressed():
+                control.script_forwarding = ScriptForwarding.exclusive
+
     def _select_page(self, page, value):
         if value:
             self._dispatch_pad_events(self._router.select(page, time.monotonic()))
+            self._apply_pad_forwarding()
             self._show_status()
 
     def _bind_hardware(self):
         router = self._profile.get("pad_router")
         if router:
-            for i, note in enumerate(router["notes"]):
-                binding = dict(type="note", channel=router["channel"], identifier=note)
-                self._raw_listener("Physical_Pad_{}".format(i + 1), binding,
-                    lambda value, i=i: self._dispatch_pad_events(self._router.receive(i, value)))
+            # The MPC's pad notes are scattered.  Translate them to the drum
+            # grid (C1 upward in physical pad order) as they enter Live, so a
+            # 4x4 drum rack matches the pads and the pad elements always see
+            # the same ordered notes.
+            self.set_pad_translations(pad_translations(router["notes"], router["channel"]))
+            for i in range(len(router["notes"])):
+                binding = dict(type="note", channel=router["channel"],
+                               identifier=canonical_pad_note(i))
+                self._pad_controls.append(self._raw_listener(
+                    "Physical_Pad_{}".format(i + 1), binding, partial(self._receive_pad, i)))
             for page, binding in router["selectors"].items():
                 self._raw_listener("Bank_" + page, binding, partial(self._select_page, page))
         for action, binding in self._profile.get("physical_buttons", {}).items():
@@ -498,6 +526,7 @@ class MPCKey37(ControlSurface):
                 control.release()
             for control in self._buttons.values():
                 control.release()
+            self._apply_pad_forwarding()
             self._mapping_signature = None
             if self._ready:
                 self._refresh_parameters()

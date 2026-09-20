@@ -9,25 +9,51 @@ PAGES = {
     "E": BANK_E,
 }
 
+# A drum rack's 4x4 grid counts from C1 at the bottom-left pad, left to
+# right, then upward; physical pads are numbered the same way.
+DRUM_GRID_BASE_NOTE = 36
+
+
+def canonical_pad_note(index):
+    """Note a physical pad plays in the drum grid: C1 upward in pad order."""
+    return DRUM_GRID_BASE_NOTE + index
+
+
+def pad_translations(notes, channel):
+    """(x, y, note, channel) entries mapping each hardware pad note to its
+    grid position.  x counts right and y counts down from the top row."""
+    return tuple(
+        (index % 4, 3 - index // 4, note, channel - 1)
+        for index, note in enumerate(notes))
+
 
 class PadRouter:
     def __init__(self):
         self.page = "A"
         self._last_a = None
+        self._last_d = None
         self._held = {}
 
     def select(self, page, now):
         if page == "A" and self._last_a is not None and 0 <= now - self._last_a <= 0.4:
             self.page = "E"
             self._last_a = None
+        elif page == "D" and self._last_d is not None and 0 <= now - self._last_d <= 0.4:
+            # Performance mode deliberately has no virtual pad actions.  The
+            # MPC's pad notes remain available to an armed Live instrument.
+            self.page = "P"
+            self._last_d = None
         else:
             self.page = page
             self._last_a = now if page == "A" else None
+            self._last_d = now if page == "D" else None
         # Release old destinations immediately when changing pages. A late
         # note-off must never be delivered to the new page's command.
         return self.release_all()
 
     def receive(self, pad, value):
+        if self.page == "P":
+            return []
         if value:
             if pad in self._held:
                 return []
@@ -46,4 +72,5 @@ class PadRouter:
         events = self.release_all()
         self.page = "A"
         self._last_a = None
+        self._last_d = None
         return events

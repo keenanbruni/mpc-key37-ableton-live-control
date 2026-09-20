@@ -1,6 +1,6 @@
 # MPC Key 37 Ableton Live Control
 
-Use the original MPC Key 37 as a hands-on control surface in Ableton Live.
+Howdy yall. This is an Ableton Live control surface template for the original/G1 Akai MPC Key 37. Couldn't find one anywhere so here's my take. If you don't like how I did it, fork the repo and let your slop cannon fly. Based mostly on the existing template for the MPC Force.
 
 Hardware-tested on macOS with the MPC in **Controller Mode**, Live 12.4.6, and the captured MPC Key 37 Controller Mode preset. The keyboard stays on MIDI channel 16; pads, Q-Links, and transport control Live. The Windows installer uses Ableton's supported script location, but Windows hardware testing is still needed.
 
@@ -38,6 +38,7 @@ py -3 tools\install.py --user-library "C:\path\to\your\Ableton User Library"
 - **Bank C:** scene launcher
 - **Bank D:** tracks and mixer
 - **Double-tap Bank A:** navigation, undo/redo, duplicate, quantize, and Stop All
+- **Double-tap Bank D:** Performance page; pads play an armed MIDI track receiving channel 10, following the drum rack's 4x4 grid from C1 upward
 
 Four Q-Links control the selected device, or four mixer tracks. In mixer mode, Q1–Q4 control tracks 1–4; after D16 they control tracks 5–8. D1–D8 select the track used by D9–D12. Turn a Q-Link through its current value once after changing targets; Pickup prevents parameter jumps.
 
@@ -46,7 +47,7 @@ See [CONTROL_MAP.md](CONTROL_MAP.md) for every pad assignment and [TUTORIAL_WALK
 ## Troubleshooting
 
 - **Nothing responds:** confirm Controller Mode, Port 1 as the Control Surface Input, then restart Live.
-- **Keys also trigger commands:** set your instrument track’s MPC input to **channel 16**.
+- **Performance pads light Live’s MIDI indicator but the drum track stays silent:** the pads are reaching Live, but the track is not listening to them. On the drum track set **MIDI From → All Ins** and the channel chooser below it to **Ch. 10**, keep the track armed, and make sure you are on the Performance page (double-tap **D** — the status bar shows `Page P`). This keeps keyboard notes on channel 16 out of the drum rack. If you enable the MPC Key 37 input’s Track switch in Live’s MIDI settings, you can choose that port instead of All Ins.
 - **A knob appears inactive:** select a device, then rotate through its current value to pick it up.
 - **Updating:** run the installer again. It preserves your installed MIDI profile and creates a backup first.
 

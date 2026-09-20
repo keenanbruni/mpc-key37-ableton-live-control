@@ -1,6 +1,6 @@
 # MPC Key 37 — Live quick reference
 
-Pads count from the bottom-left: **1–4**, then upward through **13–16**. Press a bank button to select A–D. **Double-tap A** for E; one A press returns to A.
+Pads count from the bottom-left: **1–4**, then upward through **13–16**. Press a bank button to select A–D. **Double-tap A** for E; one A press returns to A. **Double-tap D** for Performance: pads play an armed MIDI track on channel 10, following the drum rack's 4x4 grid from C1 (pad 1 = bottom-left); press any bank button to leave it.
 
 | Page | Pads 1–4 | Pads 5–8 | Pads 9–12 | Pads 13–16 |
 |---|---|---|---|---|
@@ -9,6 +9,7 @@ Pads count from the bottom-left: **1–4**, then upward through **13–16**. Pre
 | **C — Scenes** | Launch scenes 1–4 | Launch scenes 5–8 | Launch scenes 9–12 | Launch scenes 13–16 |
 | **D — Mixer** | Select tracks 1–4 | Select tracks 5–8 | Mute; Solo; Arm; Stop selected track | Volume mode; Pan mode; Sends A–D mode; Q-Link track half |
 | **E — Navigate / edit** | Clip grid left; right; up; down | Mixer tracks left; right; scenes previous 16; next 16 | Continue; Tap Tempo; Undo; Redo | Duplicate clip; Quantize clip; Stop All Clips; show status |
+| **Performance** | Pads 1–16 play notes | Pads 1–16 play notes | Pads 1–16 play notes | Pads 1–16 play notes |
 
 ## Q-Links
 
