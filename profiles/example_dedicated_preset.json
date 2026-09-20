@@ -1,0 +1,437 @@
+{
+  "version": 1,
+  "name": "Dedicated control preset \u2014 UNVERIFIED example",
+  "enabled": true,
+  "verified": false,
+  "hardware_mode": "pending_capture",
+  "performance_channel": 1,
+  "notes": "Example only. Replace bindings with captured MIDI; CC 100\u2013103 are not claimed hardware defaults. Null disables an individual control.",
+  "knobs": [
+    {
+      "type": "cc",
+      "channel": 16,
+      "identifier": 100,
+      "encoding": "absolute"
+    },
+    {
+      "type": "cc",
+      "channel": 16,
+      "identifier": 101,
+      "encoding": "absolute"
+    },
+    {
+      "type": "cc",
+      "channel": 16,
+      "identifier": 102,
+      "encoding": "absolute"
+    },
+    {
+      "type": "cc",
+      "channel": 16,
+      "identifier": 103,
+      "encoding": "absolute"
+    }
+  ],
+  "buttons": {
+    "previous_device": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 0
+    },
+    "next_device": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 1
+    },
+    "previous_bank": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 2
+    },
+    "next_bank": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 3
+    },
+    "device_half": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 4
+    },
+    "device_lock": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 5
+    },
+    "device_enable": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 6
+    },
+    "device_mode": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 7
+    },
+    "previous_track": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 8
+    },
+    "next_track": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 9
+    },
+    "play": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 10
+    },
+    "stop": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 11
+    },
+    "session_record": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 12
+    },
+    "arrangement_record": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 13
+    },
+    "loop": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 14
+    },
+    "metronome": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 15
+    },
+    "clip_1": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 16
+    },
+    "clip_2": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 17
+    },
+    "clip_3": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 18
+    },
+    "clip_4": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 19
+    },
+    "clip_5": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 20
+    },
+    "clip_6": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 21
+    },
+    "clip_7": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 22
+    },
+    "clip_8": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 23
+    },
+    "clip_9": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 24
+    },
+    "clip_10": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 25
+    },
+    "clip_11": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 26
+    },
+    "clip_12": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 27
+    },
+    "clip_13": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 28
+    },
+    "clip_14": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 29
+    },
+    "clip_15": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 30
+    },
+    "clip_16": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 31
+    },
+    "scene_1": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 32
+    },
+    "scene_2": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 33
+    },
+    "scene_3": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 34
+    },
+    "scene_4": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 35
+    },
+    "scene_5": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 36
+    },
+    "scene_6": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 37
+    },
+    "scene_7": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 38
+    },
+    "scene_8": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 39
+    },
+    "scene_9": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 40
+    },
+    "scene_10": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 41
+    },
+    "scene_11": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 42
+    },
+    "scene_12": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 43
+    },
+    "scene_13": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 44
+    },
+    "scene_14": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 45
+    },
+    "scene_15": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 46
+    },
+    "scene_16": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 47
+    },
+    "track_1": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 48
+    },
+    "track_2": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 49
+    },
+    "track_3": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 50
+    },
+    "track_4": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 51
+    },
+    "track_5": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 52
+    },
+    "track_6": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 53
+    },
+    "track_7": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 54
+    },
+    "track_8": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 55
+    },
+    "mute": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 56
+    },
+    "solo": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 57
+    },
+    "arm": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 58
+    },
+    "stop_track": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 59
+    },
+    "volume_mode": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 60
+    },
+    "pan_mode": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 61
+    },
+    "send_mode": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 62
+    },
+    "mixer_half": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 63
+    },
+    "session_left": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 64
+    },
+    "session_right": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 65
+    },
+    "session_up": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 66
+    },
+    "session_down": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 67
+    },
+    "mixer_left": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 68
+    },
+    "mixer_right": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 69
+    },
+    "scenes_previous": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 70
+    },
+    "scenes_next": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 71
+    },
+    "continue": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 72
+    },
+    "tap_tempo": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 73
+    },
+    "undo": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 74
+    },
+    "redo": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 75
+    },
+    "duplicate": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 76
+    },
+    "quantize": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 77
+    },
+    "stop_all": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 78
+    },
+    "status": {
+      "type": "note",
+      "channel": 16,
+      "identifier": 79
+    }
+  }
+}
