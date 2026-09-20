@@ -1,6 +1,6 @@
 # MPC Key 37 Ableton Live tutorial
 
-Open `MPC Key 37 Tutorial.als` in Session View. It is a safe practice set: eight tracks, two prepared scenes of blank MIDI clips, Drift for keyboard playback, and two Auto Filters for device control. There is no audio material in the set, so you can explore without surprises.
+Open `MPC Key 37 Tutorial.als` in Session View. It is a safe practice set: twelve tracks, two prepared scenes of blank MIDI clips, Drift for keyboard playback, and two Auto Filters for device control. There is no audio material in the set, so you can explore without surprises.
 
 ## Before you start
 
@@ -34,11 +34,12 @@ The set contains blank MIDI clips in scenes 1 and 2 on tracks 2–8.
 
 Press **D**.
 
-- **D1–D8** select the eight tutorial tracks.
-- **D13** makes Q-Links control the selected track's volume.
-- **D14** makes Q-Links control pan.
-- **D15** cycles Q-Links through Sends A–D.
-- **D16** switches Q-Links between tracks 1–4 and tracks 5–8.
+- **D1–D8** select the track used by D9–D12.
+- **D13** maps Q1–Q4 to volume for tracks 1–4.
+- **D14** maps Q1–Q4 to pan for tracks 1–4.
+- **D15** maps Q1–Q4 to Sends A–D for tracks 1–4.
+- **D16** switches the Q-Links to tracks 5–8.
+- Double-tap **A**, press **E6**, then return to **D**: the mixer window becomes tracks 5–12. Press **D16** and Q1–Q4 now control tracks 9–12. **E5** moves back.
 - **D9/D10/D11** toggle mute, solo, and arm on the selected track. **D12** stops that track's clip.
 
 ### 4. Keyboard, editing, and transport 

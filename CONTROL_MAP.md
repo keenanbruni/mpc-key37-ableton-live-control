@@ -13,7 +13,7 @@ Pads count from the bottom-left: **1–4**, then upward through **13–16**. Pre
 ## Q-Links
 
 - **Device mode**: Q-Links 1–4 control parameter slots 1–4. A5 switches them to slots 5–8.
-- **Mixer mode**: D13 selects volume, D14 pan, D15 cycles sends A–D, D16 switches Q-Links between tracks 1–4 and 5–8.
+- **Mixer mode**: D13 selects volume, D14 pan, D15 cycles sends A–D, and D16 switches Q-Links between tracks 1–4 and 5–8. Q1–Q4 always follow the active four-track half; D1–D8 only choose the track for D9–D12.
 - Live’s **Pickup** takeover prevents jumps after changing a Q-Link target.
 
 ## Dedicated transport buttons

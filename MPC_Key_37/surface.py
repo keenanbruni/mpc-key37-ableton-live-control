@@ -138,13 +138,17 @@ class MPCKey37(ControlSurface):
         self._scenes = SceneListComponent(session_ring=self._session_ring, num_scenes=16, name="Scenes")
         self._mixer_ring = SessionRingComponent(num_tracks=8, num_scenes=0,
             set_session_highlight=lambda *a: None,
-            tracks_to_use=lambda: tuple(self.song.visible_tracks) + tuple(self.song.return_tracks) + (self.song.master_track,),
+            # Page D is a track mixer.  Keeping returns and the master out of
+            # this ring means an eight-track window always refers to the
+            # project's visible tracks, rather than an unexpected mixture of
+            # tracks, return channels, and master.
+            tracks_to_use=lambda: tuple(self.song.visible_tracks),
             name="Mixer_Window")
         self._mixer = MixerComponent(tracks_provider=self._mixer_ring,
-            track_assigner=RightAlignTracksTrackAssigner(song=self.song, include_master_track=True),
+            track_assigner=RightAlignTracksTrackAssigner(song=self.song, include_master_track=False),
             channel_strip_component_type=ChannelStripComponent, name="Mixer")
-        self._mixer.set_track_select_buttons(self._matrix(
-            ["track_{}".format(i + 1) for i in range(8)], 8, "Track_Pads"))
+        # Routed Page D pads are virtual controls, so select directly rather
+        # than relying on the bundled mixer's native MIDI button layer.
         self._transport = MPCTransportComponent(name="Transport", layer=self._layer(
             play_button="play", stop_button="stop"))
         # The bundled MPC transport inherits these as setter-managed toggles,
@@ -258,6 +262,8 @@ class MPCKey37(ControlSurface):
             self._listen(action, partial(self._move_session, tracks, scenes))
         self._listen("mixer_left", partial(self._move_mixer, -8))
         self._listen("mixer_right", partial(self._move_mixer, 8))
+        for index in range(8):
+            self._listen("track_{}".format(index + 1), partial(self._select_mixer_track, index))
 
     def _play(self):
         self.song.is_playing = not self.song.is_playing
@@ -266,6 +272,13 @@ class MPCKey37(ControlSurface):
     def _stop(self):
         self.song.stop_playing()
         self.log_message("MPC pad stop pressed")
+
+    def _select_mixer_track(self, index):
+        track = self._mixer.channel_strip(index).track
+        if liveobj_valid(track):
+            self.song.view.selected_track = track
+            self.log_message("MPC selected mixer track {}".format(track.name))
+            self._show_status()
 
     def _device_parameters_changed(self):
         if self._ready:
@@ -439,6 +452,9 @@ class MPCKey37(ControlSurface):
 
     def _move_mixer(self, delta):
         ring = self._mixer_ring
+        # Preserve a full eight-track window at the end of a project.  With
+        # twelve tracks, for example, the next window is tracks 5–12 and its
+        # D16 half is tracks 9–12.
         ring.set_offsets(bounded_offset(ring.track_offset, delta, len(ring.tracks_to_use()), 8), 0)
         self._refresh_parameters()
         self._show_status()
@@ -448,11 +464,13 @@ class MPCKey37(ControlSurface):
         names = [info.name if info and info.parameter else "—" for info in self._parameter_provider.parameters]
         bank = self._device_bank_registry.get_device_bank(device) if liveobj_valid(device) else 0
         mode = self._mode if self._mode != "send" else "Send " + "ABCD"[self._send_index]
-        message = "MPC | Page {} | {} | {} | Bank {} {} | Q: {} | Clips T{} S{} | Mixer T{} {}".format(
+        selected = self.song.view.selected_track
+        message = "MPC | Page {} | {} | {} | Bank {} {} | Q: {} | Clips T{} S{} | Mixer T{} {} | Selected {}".format(
             self._router.page, mode, device.name if liveobj_valid(device) else "No device", (bank or 0) + 1,
             "1–4" if self._device_half == 0 else "5–8", " / ".join(names),
             self._session_ring.track_offset + 1, self._session_ring.scene_offset + 1,
-            self._mixer_ring.track_offset + 1, "1–4" if self._mixer_half == 0 else "5–8")
+            self._mixer_ring.track_offset + 1, "1–4" if self._mixer_half == 0 else "5–8",
+            selected.name if liveobj_valid(selected) else "—")
         self.show_message(message)
         if message != self._last_status:
             self.log_message(message)

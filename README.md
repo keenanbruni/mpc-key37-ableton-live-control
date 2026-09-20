@@ -39,7 +39,7 @@ py -3 tools\install.py --user-library "C:\path\to\your\Ableton User Library"
 - **Bank D:** tracks and mixer
 - **Double-tap Bank A:** navigation, undo/redo, duplicate, quantize, and Stop All
 
-Four Q-Links control the selected device, or four mixer tracks. Turn a Q-Link through the current value once after changing targets; Pickup prevents parameter jumps.
+Four Q-Links control the selected device, or four mixer tracks. In mixer mode, Q1–Q4 control tracks 1–4; after D16 they control tracks 5–8. D1–D8 select the track used by D9–D12. Turn a Q-Link through its current value once after changing targets; Pickup prevents parameter jumps.
 
 See [CONTROL_MAP.md](CONTROL_MAP.md) for every pad assignment and [TUTORIAL_WALKTHROUGH.md](TUTORIAL_WALKTHROUGH.md) for a guided Live set.
 
